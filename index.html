@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body class="d-flex fdir-col w100 jcont-center aitem-center " >
+    <main class="d-flex fdir-col w90 gap1REM jcont-center aitem-center mtop-2REM mbot-2REM">
+        <section id="Exercise1" class="sectExc d-flex fdir-col w90 gap1REM jcont-center aitem-center">
+            <header>
+                <h3>Ejercicio 1</h3>
+                <h5>De acuerdo al codigo proporcionado a continuación, se realizara unas series de preguntas para validar si las variables son accesibles o no,
+                    al final se dara una retroalimentación.
+                </h5>
+            </header>
+            <code>
+                // Global Scope<br>
+                var globalVariable = "Soy una variable global.";<br><br>
+                function testScope() {<br>
+                // Function Scope<br>
+                var functionVariable = "Soy una variable local.";<br><br>
+                if (true) {<br>
+                    // Block Scope<br>
+                    let blockVariable = "Soy una variable de bloque.";<br>
+                    console.log("Dentro del bloque:", blockVariable);<br>
+                }<br><br>
+                console.log("Dentro de la función:", functionVariable);<br>
+                }<br><br>
+                console.log("Fuera de la función:", globalVariable);<br>
+                testScope();<br>
+            </code>
+            <button id="1stExc">Try it!</button>
+        </section>
+
+        <section id="Exercise2" class="sectExc d-flex fdir-col w90 gap1REM jcont-center aitem-center">
+            <header>
+                <h3>Ejercicio 2</h3>
+                <h5>De acuerdo al codigo proporcionado a continuación, se realizara unas series de preguntas para predecir el comportamiento del programa,
+                    al final se dara una retroalimentación.
+                </h5>
+            </header>
+            <code>
+                // vars call<br>
+                console.log("Valor de a:", a);<br>
+                console.log("Valor de b:", b);<br>
+                console.log("Valor de c:", c);<br>
+                <br>
+                // functions call<br>
+                console.log("Resultado de funcionDeclarada:", funcionDeclarada());<br>
+                console.log("Resultado de funcionExpresada:", funcionExpresada());<br>
+                <br>
+                // vars declaration<br>
+                var a = 1;<br>
+                let b = 2;<br>
+                const c = 3;<br>
+                <br>
+                // functions declarations<br>
+                function funcionDeclarada() {<br>
+                return "Función declarada ha sido llamada.";<br>
+                }<br>
+                <br>
+                const funcionExpresada = function () {<br>
+                return "Función expresada ha sido llamada.";<br>
+                };<br>
+            </code>
+            <button id="2ndExc">Try it!</button>
+        </section>
+
+        <section id="Exercise3" class="sectExc d-flex fdir-col w90 gap1REM jcont-center aitem-center">
+            <header>
+                <h3>Ejercicio 3</h3>
+                <h5>De acuerdo al codigo proporcionado a continuación, se realizara una pregunta para predecir el comportamiento del programa,
+                    al final se dara una retroalimentación.
+                </h5>
+            </header>
+            <code>
+                const crearSumador = (num)=>{<br>
+                    const suma = (num2) =>{<br>
+                        return num + num2<br>
+                    }<br>
+                    return suma;<br>
+                }<br>
+                <br>
+                const sumarCinco = crearSumador(5);<br>
+                console.log(sumarCinco(3));<br>
+            </code>
+            <button id="3thExc">Try it!</button>
+        </section>
+
+        <section id="Exercise4" class="sectExc d-flex fdir-col w90 gap1REM jcont-center aitem-center">
+            <header>
+                <h3>Ejercicio 4</h3>
+                <h5>De acuerdo al codigo proporcionado a continuación, se realizara una pregunta para predecir el comportamiento del programa,
+                    al final se dara una retroalimentación.
+                </h5>
+            </header>
+            <code>
+                console.log(<br>
+                "Intentando llamar a 'funcionDeclarada' antes de su declaración:"<br>
+                );<br>
+                try {<br>
+                console.log(funcionDeclarada());<br>
+                } catch (error) {<br>
+                console.log("Error:", error.message);<br>
+                }<br>
+                <br>
+                console.log(<br>
+                "Intentando llamar a 'funcionExpresada' antes de su declaración:"<br>
+                );<br>
+                try {<br>
+                console.log(funcionExpresada());<br>
+                } catch (error) {<br>
+                console.log("Error:", error.message);<br>
+                }<br>
+                <br>
+                // Declaración de una función declarada<br>
+                function funcionDeclarada() {<br>
+                return "Función declarada ha sido llamada.";<br>
+                }<br>
+                <br>
+                // Declaración de una función expresada<br>
+                const funcionExpresada = function () {<br>
+                return "Función expresada ha sido llamada.";<br>
+                };<br>
+                <br>
+                console.log("Llamando a 'funcionDeclarada' después de su declaración:");<br>
+                console.log(funcionDeclarada());<br>
+                <br>
+                console.log("Llamando a 'funcionExpresada' después de su declaración:");<br>
+                console.log(funcionExpresada());<br>
+            </code>
+            <button id="4thExc">Try it!</button>
+        </section>
+
+    </main>
+    <script src="./index.js"></script>
+</body>
+</html>

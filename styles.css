@@ -1,0 +1,62 @@
+/* :root{
+} */
+
+html{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
+h5{
+    font-weight: 400;
+}
+/* utilities */
+
+.d-flex{
+    display: flex;
+}
+
+.fdir-col{
+    flex-direction: column;
+}
+
+.jcont-center {
+    justify-content: center;
+}
+
+.jcont-spabtw{
+    justify-content: space-between;
+}
+
+.aitem-center{
+    align-items: center;
+}
+
+.gap1REM{
+    gap: 1rem;
+}
+
+.w100{
+    width: 100%;
+}
+
+.w90{
+    width: 90%;
+}
+
+.mtop-2REM{
+    margin-top: 2rem;
+}
+
+.mbot-2REM{
+    margin-bottom: 2rem;
+}
+
+button{
+    padding: 10px;
+}
