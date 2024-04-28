@@ -274,13 +274,34 @@ const createCounter = () =>{
     const addCounter = () =>{
         const num = document.getElementById("number").value ? document.getElementById("number").value : 0;
         counter+=Number (num);
-        document.getElementById("labeCount").textContent="";
+        console.log(counter);
         document.getElementById("labeCount").textContent=counter;
     }
     return addCounter 
 }
 
 const counter1 = createCounter();
+
+//Excersice 9
+const excersice9 = () => {
+    let timmer = document.getElementById("delay").value ? document.getElementById("delay").value : 0;
+    timmer = Number(timmer) * 1000;
+    document.getElementById('spinner').style.display = 'flex';
+    const getInfo = () =>{
+        fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => {
+            if(response.ok){
+                return response.json();
+            }
+            else throw new Error(`Error en la peticion: ${response.status}`);
+            }
+        )
+        .then(data => console.log(data))
+        .catch(err => console.error("Uyyy un error: ", err.message))
+        .finally(() => document.getElementById('spinner').style.display = 'none')
+    }
+    setTimeout(getInfo, timmer);
+}
 
 excer1.addToHtml('main');
 excer2.addToHtml('main');
@@ -291,3 +312,4 @@ document.getElementById("2ndExc").addEventListener('click', excersice2);
 document.getElementById("3thExc").addEventListener('click', excersice3);
 document.getElementById("7thExc").addEventListener('click', excersice7);
 document.getElementById("count+").addEventListener('click', counter1);
+document.getElementById("9thExc").addEventListener('click', excersice9);
