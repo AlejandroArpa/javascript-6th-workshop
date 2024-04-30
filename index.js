@@ -283,7 +283,7 @@ const createCounter = () =>{
 const counter1 = createCounter();
 
 //Excersice 9
-const excersice9 = () => {
+function excersice9 () {
     let timmer = document.getElementById("delay").value ? document.getElementById("delay").value : 0;
     timmer = Number(timmer) * 1000;
     document.getElementById('spinner').style.display = 'flex';
