@@ -123,12 +123,74 @@ const verReservas = (name, rooms, roomTypes) => {
 		}
 	});
 	if(nameBooking.length>0){
-		alert(`Sus reservas son: ${nameBooking.map(book => `\nid de reserva: ${book.id}, fecha de entrada: ${book.date1}, fecha de salida: ${book.date2}, habitación numero: ${book.room} (${roomTypes.find((type) => type.id === rooms.find(room => room.number === book.room).roomTypeId).name  })`)}`)
+		return[(`Sus reservas son: ${nameBooking.map(book => `\nid de reserva: ${book.id}, fecha de entrada: ${book.date1}, fecha de salida: ${book.date2}, habitación numero: ${book.room} (${roomTypes.find((type) => type.id === rooms.find(room => room.number === book.room).roomTypeId).name  })`)}`), nameBooking];
 	}
 	else{
-		alert("No se encontraron reservas asociadas")
+		return[("No se encontraron reservas asociadas"), nameBooking];
 	}
+	
+}
 
+const editarReserva = (name, rooms, roomTypes) => {
+	const idToEdit = parseFloat(prompt(`Ingrese el id de la reserva a editar:
+${verReservas(name, rooms, roomTypes)[0]}`));
+	const bookingName = verReservas(name, rooms, roomTypes)[1];
+	if(bookingName.length>0){
+		let exist = false;
+		bookingName.forEach(element => {
+			element.id === idToEdit ? exist = true : null
+		});
+		if(isValidNumber(idToEdit) && exist){
+			const book = [];
+			booking.forEach((e,idx) => {
+				if(e.id === idToEdit){
+					const copyBook = {...e}
+					book.push(copyBook);
+					book.push(idx)
+					}
+			});
+			if(book.length > 0){
+				const newDate = prompt("Ingrese las nuevas fechas separadas por ','").split(',');
+				book[0].date1 = newDate[0];
+				book[0].date2 = newDate[1];
+				booking.splice(book[1], 1, book[0]);
+				alert("Reserva modificada");
+			}
+			else{
+				alert(`el id ${idToEdit} no ha sido encontrado`);
+			}
+		}
+		else alert("Valor ingresado no valido");
+	}
+}
+
+const cancelarReserva = (name, rooms, roomTypes) => {
+	const idToEdit = parseFloat(prompt(`Ingrese el id de la reserva a editar:
+${verReservas(name, rooms, roomTypes)[0]}`));
+	const bookingName = verReservas(name, rooms, roomTypes)[1];
+	if(bookingName.length>0){
+		let exist = false;
+		bookingName.forEach(element => {
+			element.id === idToEdit ? exist = true : null
+		});
+		if(isValidNumber(idToEdit) && exist){
+			booking.forEach((e,idx) => {
+				if(e.id === idToEdit){
+					if(confirm(`Seguro desea eliminar la reserva:
+id: ${e.id}, fecha de ingreso: ${e.date1}, fecha de salida: ${e.date2}, habitacion: ${e.room}`)
+					){
+						booking.splice(idx, 1);
+						rooms.forEach(room =>{
+							if(room.number === e.room){
+								room.availability = true;
+							}
+						})
+						alert("Reserva eliminada")
+					}
+				}
+			});
+		}
+	}
 }
 
 
@@ -153,11 +215,13 @@ const main = async () =>{
 				hacerReserva(rooms, roomTypes, generarId);
 				break;
 			case '3':
-				verReservas(prompt("Ingrese a nombre de quien esta la reserva:"), rooms, roomTypes)
+				alert(verReservas(prompt("Ingrese a nombre de quien esta la reserva:"), rooms, roomTypes)[0]);
 				break;
 			case '4':
+				editarReserva(prompt("Ingrese a nombre de quien esta la reserva:"), rooms, roomTypes);
 				break;
 			case '5':
+				cancelarReserva(prompt("Ingrese a nombre de quien esta la reserva:"), rooms, roomTypes);
 				break;
 			case '6':
 				seguir = false;
