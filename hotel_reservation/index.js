@@ -1,6 +1,7 @@
 
 const url = "./data.json"; 
-const booking =[]
+const booking =[];
+const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4},(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/;
 
 function isValidNumber(input) {
     return !isNaN(input);
@@ -64,48 +65,42 @@ const hacerReserva = (rooms, roomTypes, generarId) =>{
 			if(room){
 				if(room.availability){
 					alert("habitacion disponible");
-					console.log();
 					try{
-						const dates = prompt("Ingrese las fechas con el siguiente formato (fecha de inicio y fecha de salida)separadas por coma : dd/mm/aaaa,dd/mm/aaaa").split(',');
-						const name = prompt("Ingrese a nombre de quien desea reservar: ");
-						if(name){
-							const id =generarId();
-							const book = {
-								id,
-								name,
-								date1: dates[0],
-								date2: dates[1],
-								room: room.number
-							}
-							if(confirm("Desea guardar su reserva?")){
-								room.availability = false;
-								booking.push(book);
-								alert("Reserva creada");
-								console.log(book);
+						let dates = prompt("Ingrese las fechas con el siguiente formato (fecha de inicio y fecha de salida)separadas por coma : dd/mm/aaaa,dd/mm/aaaa");
+						if (regex.test(dates)){
+							dates = dates.split(',');
+							const name = prompt("Ingrese a nombre de quien desea reservar: ");
+							if(name){
+								const id =generarId();
+								const book = {
+									id,
+									name,
+									date1: dates[0],
+									date2: dates[1],
+									room: room.number
+								}
+								if(confirm("Desea guardar su reserva?")){
+									room.availability = false;
+									booking.push(book);
+									alert("Reserva creada");
+									console.log(book);
+								}
 							}
 						}
+						else alert("Formato de fechas inválido");
 					}
-					catch{
-						alert("Error en el ingreso de informacion")
+					catch{(err)=>{
+						alert(`Error en el ingreso de informacion ${err}`)
 					}
-
-					
+					}
 				}
-				else{
-					alert("Habitacion no disponible");
-				}
+				else alert("Habitacion no disponible");
 			}
-			else{
-				alert("Habitacion no encontrada o disponible segun requerimientos");
-			}
+			else alert("Habitacion no encontrada o disponible segun requerimientos");
 		}
-		else{
-			alert("valor ingresado no valido")
-		}
+		else alert("valor ingresado no valido")
 	}
-	else{
-		alert("valor ingresado no valido")
-	}
+	else alert("valor ingresado no valido")
 }
 
 function generarGeneradorId() {
@@ -150,11 +145,17 @@ ${verReservas(name, rooms, roomTypes)[0]}`));
 					}
 			});
 			if(book.length > 0){
-				const newDate = prompt("Ingrese las nuevas fechas separadas por ','").split(',');
-				book[0].date1 = newDate[0];
-				book[0].date2 = newDate[1];
-				booking.splice(book[1], 1, book[0]);
-				alert("Reserva modificada");
+				let newDate = prompt("Ingrese las nuevas fechas separadas por ','");
+				if (regex.test(newDate)){
+					newDate = newDate.split(',');
+					book[0].date1 = newDate[0];
+					book[0].date2 = newDate[1];
+					booking.splice(book[1], 1, book[0]);
+					alert("Reserva modificada");
+				}
+				else {
+					alert("Formato de fechas inválido");
+				}
 			}
 			else{
 				alert(`el id ${idToEdit} no ha sido encontrado`);
@@ -187,8 +188,14 @@ id: ${e.id}, fecha de ingreso: ${e.date1}, fecha de salida: ${e.date2}, habitaci
 						})
 						alert("Reserva eliminada")
 					}
+					else{
+						alert
+					}
 				}
 			});
+		}
+		else{
+			alert("id No encontrado")
 		}
 	}
 }
